@@ -254,7 +254,7 @@ header h3 {
     }
 
     #recruitment div h1, #about div h1 {
-        width: 90vw;
+        width: 80vw;
         font-size: 36px;
         margin-left: auto;
         margin-right: auto;
@@ -262,7 +262,7 @@ header h3 {
     }
 
     #recruitment div p, #about div p {
-        width: 90vw;
+        width: 80vw;
         font-size: 16px;
         margin-left: auto;
         margin-right: auto;
@@ -309,4 +309,5 @@ header h3 {
     #upcoming-events div h3 {
         font-size: 14px;
     }
+
 }
