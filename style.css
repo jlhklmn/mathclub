@@ -155,7 +155,6 @@ header img {
     height: 28vh;
     margin-top: 16vh;
     margin-bottom: 8vh;
-    transition-duration: 0.2s;
 }
 
 header > h1, h2, h3 {
@@ -165,14 +164,12 @@ header > h1, h2, h3 {
     font-weight: 300;
     margin-top: 2vh;
     padding: 0 24px;
-    transition-duration: 0.2s;
 }
 
 header h1 {
     color: var(--text-color);
     font-size: 32px;
     font-weight: 500;
-    transition-duration: 0.2s;
 }
 
 header h1 span {
@@ -195,7 +192,6 @@ header .links {
     border-radius: 99px;
     padding: 8px 42px;
     font-size: 18px;
-    transition-duration: 0.2s;
 }
 
 .links a:hover {
@@ -309,5 +305,4 @@ header h3 {
     #upcoming-events div h3 {
         font-size: 14px;
     }
-
 }
