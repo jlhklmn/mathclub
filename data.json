@@ -1,14 +1,14 @@
 {
     "events": [
         {
-            "title": "Frankie's Birthday! ",
-            "description": "Happy birthday F-Boss!!! 🎉🎉",
-            "date": 1759507200000
-        },
-        {
             "title": "🍊",
             "description": "??",
             "date": 1779465600000
+        },
+        {
+            "title": "Afterschool Meeting",
+            "description": "Thursday 16th, Room 204 (New campus)",
+            "date": 1760598000000
         }
     ]
 }
