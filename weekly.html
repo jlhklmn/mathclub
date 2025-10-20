@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Stamford HK Math Club</title>
+
+        <link rel="icon" href="icon.ico">
+        <link rel="stylesheet" href="style.css">
+
+        <script src="weekly.js" defer></script>
+    </head>
+    <body>
+        <nav>
+            <a href="index.html" class="leftmost" id="viewing"><img src="icon.ico" alt=""><span>Stamford HK Math Club</span></a>
+            <a href="events.html">Calendar</a>
+            <a href="about.html">Info</a>
+        </nav>
+
+        <h2 id="none" style="margin-top: 45vh;">Loading weekly math problem data...<br>(Refresh if it takes too long)</h2>
+
+        <div id="weekly">
+            <div id="question">
+                <h1>Question of the Week</h1>
+                <h2 id="qdate"></h2>
+                <div id="qimg"></div>
+
+                <div class="links" style="margin: 0 auto; margin-top: 64px;"><a style="text-align: center;" href="https://forms.gle/tVUwBui6bnfz1tNq9" target="_blank">Send your Answer</a></div>
+                <h2 id="displayname"></h2>
+            </div>
+            <div id="competitive">
+                <h1>Monthly Leaderboard 🏆</h1>
+                <a id="datedisplayleaderboard"></a>
+
+                <div id="placeholderdiv" style="width: 100%; height: 520px; margin-top: 32px; overflow: hidden; overflow-y: scroll;"></div>
+            </div>
+        </div>
+    </body>
+</html>
