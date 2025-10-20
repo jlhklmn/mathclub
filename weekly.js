@@ -37,8 +37,8 @@ function ww(epoch) {
 document.querySelector("#weekly").style.display = "none"
 
 document.querySelector("#datedisplayleaderboard").addEventListener("click", () => {
-  display ++
-  if (display > max) {display = 0}
+  display --
+  if (display < 0) {display = 0}
 
   upd()
   console.log("Display; " + String(display))
