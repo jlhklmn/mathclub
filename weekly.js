@@ -4,7 +4,15 @@ const datasheet2 = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS6wvFOZrr6G
 
 var display = 0
 var max = 0
+var qnum = 1
 const ui = []
+
+const dcolors = [
+  "#365b27",
+  "#565b27ff",
+  "#5b4927ff",
+  "#5b2727ff"
+]
 
 const months = [
     "January",
@@ -21,6 +29,7 @@ const months = [
     "December"
 ]
 
+// Methods
 function mm(epoch) {
   const d = new Date(Number(epoch))
   return `${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
@@ -33,7 +42,10 @@ function ww(epoch) {
   return `${s}${s==1&&"st"||s==2&&"nd"||s==3&&"rd"||"th"} of ${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
 }
 
-// Methods
+function cma(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 document.querySelector("#weekly").style.display = "none"
 
 document.querySelector("#datedisplayleaderboard").addEventListener("click", () => {
@@ -42,6 +54,27 @@ document.querySelector("#datedisplayleaderboard").addEventListener("click", () =
 
   upd()
   console.log("Display; " + String(display))
+})
+
+document.querySelector("#q1").addEventListener("click", () => {
+  qnum = 1
+  qupd()
+})
+document.querySelector("#q2").addEventListener("click", () => {
+  qnum = 2
+  qupd()
+})
+document.querySelector("#q3").addEventListener("click", () => {
+  qnum = 3
+  qupd()
+})
+document.querySelector("#q4").addEventListener("click", () => {
+  qnum = 4
+  qupd()
+})
+document.querySelector("#q5").addEventListener("click", () => {
+  qnum = 5
+  qupd()
 })
 
 async function fetchCsvToJson(url) {
@@ -66,16 +99,9 @@ async function fetchCsvToJson(url) {
     jsonData.sort((a, b) => b["Timestamp"] - a["Timestamp"])
     console.log(jsonData)
 
-    const ii = jsonData[jsonData.length-1]["Weekly Question (Image)"]
-    const tt = jsonData[jsonData.length-1]["Weekly Question (Text)"]
+    jlhklmn = jsonData
 
-    document.querySelector("#qtxt").textContent = tt != "" && tt || "*No question provided by the problem designer*"
-    document.querySelector("#qtxt").style.display = (tt != "" && ii == "") && "inline" || "none"
-
-    if (ii != "") {
-      const qimg = (jsonData[jsonData.length-1]["Weekly Question (Image)"]).split("id=")
-      document.querySelector("#qimg").style.backgroundImage = `url(https://lh3.googleusercontent.com/d/${qimg[1]})`
-    }
+    qupd()
 
     const author = jsonData[jsonData.length-1]["Author Name"]
     document.querySelector("#displayname").textContent = `Question designed by ${author == "" && jsonData[jsonData.length-1]["Email Address"].split("@")[0] || author}`
@@ -155,14 +181,18 @@ async function fetchCsvToJson(url) {
             }
 
             if (answ[ww(v["timestamp_epoch"])]) {
-              if (Number(v["Final Answer"]) == Number(answ[ww(v["timestamp_epoch"])]["Correct Answer"])) {
-                scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += 50
-                userdata[v["Email Address"]]["total"] += 50
+              var t = false
 
-                userdata[v["Email Address"]]["streak"] ++
-              } else {
-                userdata[v["Email Address"]]["streak"] = 0
+              for (j = 0; j < 5; j ++) {
+                if (String(v[`Question ${i+1}`]).toLowerCase() == String(answ[ww(v["timestamp_epoch"])][`Q${i+1} Answer`]).toLowerCase()) {
+                  scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += ((j+1)^2) * 4
+                  userdata[v["Email Address"]]["total"] += ((j+1)^2) * 4
+
+                  t = true
+                }
               }
+
+              if (t) {userdata[v["Email Address"]]["streak"] ++} else {userdata[v["Email Address"]]["streak"] = 0}
             } else {
               console.log(ww(v["timestamp_epoch"])+"; No answer provided")
             }
@@ -215,7 +245,7 @@ async function fetchCsvToJson(url) {
             s.setAttribute("id", "score")
 
             name.textContent = userdata[email]["display"]
-            s.textContent = String(score) + " Points"
+            s.textContent = cma(score) + " Points"
             streak.textContent = userdata[email]["streak"]
             place.textContent = p+". "
 
@@ -267,6 +297,35 @@ function upd() {
   for (i = 0; i < ui.length; i++) {
     if (i == display) {date.textContent = ui[i][0]}
     ui[i][1].style.display = i == display && "block" || "none"
+  }
+}
+
+function qupd() {
+  const d = jlhklmn[jlhklmn.length-1]
+
+  const _tt = d[`Q${String(qnum)} Text`]
+  const ii = d[`Q${String(qnum)} Image`]
+
+  const __tt = _tt.replace("/n", "\n")
+  const tt = __tt.replace("/c", ",")
+
+  document.querySelector("#qtxt").textContent = tt != "" && tt || "*No question provided by the problem designer*"
+  document.querySelector("#qtxt").style.display = (tt != "" && ii == "") && "inline" || "none"
+
+  const diff = d[`Q${String(qnum)} Difficulty`]
+  const dc = dcolors[diff-1]
+
+  document.querySelector("#q1").style.backgroundColor = qnum == 1 && dc || "var(--secondary-color)"
+  document.querySelector("#q2").style.backgroundColor = qnum == 2 && dc || "var(--secondary-color)"
+  document.querySelector("#q3").style.backgroundColor = qnum == 3 && dc || "var(--secondary-color)"
+  document.querySelector("#q4").style.backgroundColor = qnum == 4 && dc || "var(--secondary-color)"
+  document.querySelector("#q5").style.backgroundColor = qnum == 5 && dc || "var(--secondary-color)"
+
+  if (ii != "") {
+    const qimg = (ii).split("id=")
+    document.querySelector("#qimg").style.backgroundImage = `url(https://lh3.googleusercontent.com/d/${qimg[1]})`
+  } else {
+    document.querySelector("#qimg").style.backgroundImage = ""
   }
 }
 
