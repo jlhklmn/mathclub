@@ -287,7 +287,8 @@ header h3 {
     aspect-ratio: 1.5;
     max-width: calc(100% - 16px);
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     margin: 0 auto;
     display: flex;
     cursor: pointer;
@@ -392,18 +393,15 @@ header h3 {
     justify-self: center;
 }
 
-#question h4 {
+#qtxt {
     font-size: 16px;
     color: var(--primary-color);
     background-color: var(--text-color);
     font-weight: 300;
     text-align: center;
-    width: calc(100% - 32px);
+    width: calc(100% - 16px);
     margin: auto;
-}
-
-#qtxt {
-    transition-duration: 0.2s;
+    transition-duration: 0.15s;
 }
 
 #qimg:hover > #qtxt {
@@ -431,7 +429,7 @@ header h3 {
     aspect-ratio: 1.2;
     border-radius: 99px;
     background-color: var(--secondary-color);
-    transition-duration: 0.2s;
+    transition-duration: 0.15s;
 }
 
 @media (prefers-color-scheme: light) {
