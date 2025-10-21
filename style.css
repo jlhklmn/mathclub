@@ -421,7 +421,7 @@ header h3 {
     padding: 4px;
     padding-top: 6px;
     text-align: center;
-    color: var(--subtext-color);
+    color: #c7c4bc;
     width: 22px;
     display: inline-block;
     margin: 0;
@@ -523,3 +523,4 @@ header h3 {
         height: 22vh;
     }
 }
+
