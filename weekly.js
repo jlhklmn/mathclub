@@ -66,7 +66,14 @@ async function fetchCsvToJson(url) {
     jsonData.sort((a, b) => b["Timestamp"] - a["Timestamp"])
     console.log(jsonData)
 
-    const qimg = (jsonData[jsonData.length-1]["Weekly Question"]).split("id=")
+    const ii = jsonData[jsonData.length-1]["Weekly Question (Image)"]
+    const tt = jsonData[jsonData.length-1]["Weekly Question (Text)"]
+
+    document.querySelector("#qtxt").textContent = tt != "" && tt || "*No question provided by the problem designer*"
+    document.querySelector("#qtxt").style.display = (tt != "" && ii == "") && "inline" || "none"
+    document.querySelector("#qimg").style.display = (tt == "" && ii != "") && "flex" || "none"
+
+    const qimg = (jsonData[jsonData.length-1]["Weekly Question (Image)"]).split("id=")
     document.querySelector("#qimg").style.backgroundImage = `url(https://lh3.googleusercontent.com/d/${qimg[1]})`
 
     const author = jsonData[jsonData.length-1]["Author Name"]
