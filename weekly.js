@@ -227,7 +227,7 @@ async function fetchCsvToJson(url) {
                 }
             })
 
-            streak.style.display = (userdata[email]["streak"] == 1 || (rn != epoch && epoch != "All Time Scores")) && "none" || "inline"
+            streak.style.display = (userdata[email]["streak"] <= 1 || (rn != epoch && epoch != "All Time Scores")) && "none" || "inline"
             
             span.appendChild(place)
             span.appendChild(streak)
