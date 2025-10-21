@@ -117,7 +117,7 @@ async function fetchCsvToJson(url) {
     qupd()
 
     const author = jsonData[jsonData.length-1]["Author Name"]
-    document.querySelector("#displayname").textContent = `Question designed by ${author == "" && jsonData[jsonData.length-1]["Email Address"].split("@")[0] || author}`
+    document.querySelector("#displayname").textContent = `Questions uploaded by ${author == "" && jsonData[jsonData.length-1]["Email Address"].split("@")[0] || author}`
 
     document.querySelector("#qdate").textContent = "Current Week: "+ww(jsonData[jsonData.length-1]["timestamp_epoch"])
 
