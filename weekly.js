@@ -246,7 +246,7 @@ async function fetchCsvToJson(url) {
 
             name.textContent = userdata[email]["display"]
             s.textContent = cma(score) + " Points"
-            streak.textContent = userdata[email]["streak"]
+            streak.textContent = cma(userdata[email]["streak"])
             place.textContent = p+". "
 
             mmmmmmm = false
