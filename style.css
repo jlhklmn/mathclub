@@ -325,6 +325,7 @@ header h3 {
     text-align: center;
     font-size: 15px;
     font-weight: 300;
+    cursor: pointer;
 }
 
 #competitive > a:hover {
@@ -397,6 +398,30 @@ header h3 {
     width: calc(100% - 32px);
     height: auto;
     margin: auto;
+}
+
+#qdots {
+    width: auto;
+    height: 21px;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+
+#qdots > a {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 4px;
+    padding-top: 6px;
+    text-align: center;
+    color: var(--subtext-color);
+    width: 22px;
+    display: inline-block;
+    margin: 0;
+    cursor: pointer;
+    aspect-ratio: 1.2;
+    border-radius: 99px;
+    background-color: var(--secondary-color);
+    transition-duration: 0.2s;
 }
 
 @media (prefers-color-scheme: light) {
@@ -490,5 +515,3 @@ header h3 {
         height: 22vh;
     }
 }
-
-
