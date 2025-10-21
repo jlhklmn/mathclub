@@ -29,6 +29,11 @@ const months = [
     "December"
 ]
 
+document.querySelector("#weekly").style.display = "none"
+
+document.querySelector("#qtxt").style.height = `calc(${document.querySelector("#qtxt").style.width}/1.5)`
+document.querySelector("#qtxt").style.lineHeight = `calc(${document.querySelector("#qtxt").style.width}/1.5)`
+
 // Methods
 function mm(epoch) {
   const d = new Date(Number(epoch))
@@ -45,8 +50,6 @@ function ww(epoch) {
 function cma(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-document.querySelector("#weekly").style.display = "none"
 
 document.querySelector("#datedisplayleaderboard").addEventListener("click", () => {
   display --
@@ -309,8 +312,10 @@ function qupd() {
   const __tt = _tt.replace("/n", "\n")
   const tt = __tt.replace("/c", ",")
 
-  document.querySelector("#qtxt").textContent = tt != "" && tt || "*No question provided by the problem designer*"
-  document.querySelector("#qtxt").style.display = (tt != "" && ii == "") && "inline" || "none"
+  document.querySelector("#qtxt").textContent = tt != "" && tt || "UNDEFINED"
+  document.querySelector("#qtxt").style.display = tt != "" && "inline" || "none"
+
+  document.documentElement.style.setProperty("--hover-opacity", "100%")
 
   const diff = d[`Q${String(qnum)} Difficulty`]
   const dc = dcolors[diff-1]
@@ -324,6 +329,7 @@ function qupd() {
   if (ii != "") {
     const qimg = (ii).split("id=")
     document.querySelector("#qimg").style.backgroundImage = `url(https://lh3.googleusercontent.com/d/${qimg[1]})`
+    document.documentElement.style.setProperty("--hover-opacity", "0%")
   } else {
     document.querySelector("#qimg").style.backgroundImage = ""
   }
