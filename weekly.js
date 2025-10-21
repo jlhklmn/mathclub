@@ -196,12 +196,21 @@ async function fetchCsvToJson(url) {
             if (answ[ww(v["timestamp_epoch"])]) {
               var t = false
 
-              for (j = 0; j < 5; j ++) {
-                if (tv(v[`Question ${i+1}`]) == tv(answ[ww(v["timestamp_epoch"])][`Q${i+1} Answer`])) {
-                  scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += ((j+1)^2) * 4
-                  userdata[v["Email Address"]]["total"] += ((j+1)^2) * 4
+              if (String(v["Manual"]).toLowerCase() == "true") {
+                if (String(v["Correct"]).toLowerCase() == "true") {
+                  scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += 20
+                  userdata[v["Email Address"]]["total"] += 20
 
                   t = true
+                }
+              } else {
+                for (j = 0; j < 5; j ++) {
+                  if (tv(v[`Question ${i+1}`]) == tv(answ[ww(v["timestamp_epoch"])][`Q${i+1} Answer`])) {
+                    scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += ((j+1)^2) * 4
+                    userdata[v["Email Address"]]["total"] += ((j+1)^2) * 4
+
+                    t = true
+                  }
                 }
               }
 
@@ -225,6 +234,7 @@ async function fetchCsvToJson(url) {
         }
 
         console.log(userdata)
+        console.log(jsonData)
         console.log(scoredata)
 
         // ==================
