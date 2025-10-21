@@ -377,12 +377,12 @@ header h3 {
     background-image: url("streak.png");
     background-position: center;
     background-size: contain;
-    width: 24px;
+    width: 22px;
     aspect-ratio: 1;
     margin: 0;
     margin-right: 6px;
     font-size: 11px;
-    line-height: 24px;
+    line-height: 22px;
     color: var(--text-color);
     text-align: center;
     justify-self: center;
@@ -489,3 +489,4 @@ header h3 {
         height: 22vh;
     }
 }
+
