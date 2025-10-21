@@ -10,6 +10,7 @@
     --subaccent-color: #83b5f2;
 
     --iteration: 3;
+    --hover-opacity: 100%;
 }
 
 html {
@@ -289,6 +290,7 @@ header h3 {
     background-size: cover;
     margin: 0 auto;
     display: flex;
+    cursor: pointer;
     background-color: var(--text-color);
 }
 
@@ -393,11 +395,19 @@ header h3 {
 #question h4 {
     font-size: 16px;
     color: var(--primary-color);
+    background-color: var(--text-color);
     font-weight: 300;
     text-align: center;
     width: calc(100% - 32px);
-    height: auto;
     margin: auto;
+}
+
+#qtxt {
+    transition-duration: 0.2s;
+}
+
+#qimg:hover > #qtxt {
+    opacity: var(--hover-opacity);
 }
 
 #qdots {
@@ -515,4 +525,3 @@ header h3 {
         height: 22vh;
     }
 }
-
