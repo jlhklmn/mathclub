@@ -389,11 +389,11 @@ header h3 {
 }
 
 #question h4 {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--primary-color);
     font-weight: 300;
     text-align: left;
-    width: calc(100% - 12px);
+    width: calc(100% - 32px);
     height: auto;
     margin: auto;
 }
