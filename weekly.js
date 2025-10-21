@@ -32,9 +32,19 @@ const months = [
 document.querySelector("#weekly").style.display = "none"
 
 document.querySelector("#qtxt").style.height = `calc(${document.querySelector("#qtxt").style.width}/1.5)`
-document.querySelector("#qtxt").style.lineHeight = `calc(${document.querySelector("#qtxt").style.width}/1.5)`
+document.querySelector("#qtxt").style.lineHeight = `calc((${document.querySelector("#qtxt").style.width}/1.5) - 16px)`
 
 // Methods
+function tv(value) {
+  value = String(value).replace(/\s+/g, '')
+
+  if (! Number(value)) {
+    return String(value).toLowerCase()
+  } else {
+    String(Math.round(Number(value) * 1000) / 1000)
+  }
+}
+
 function mm(epoch) {
   const d = new Date(Number(epoch))
   return `${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
@@ -187,7 +197,7 @@ async function fetchCsvToJson(url) {
               var t = false
 
               for (j = 0; j < 5; j ++) {
-                if (String(v[`Question ${i+1}`]).toLowerCase() == String(answ[ww(v["timestamp_epoch"])][`Q${i+1} Answer`]).toLowerCase()) {
+                if (tv(v[`Question ${i+1}`]) == tv(answ[ww(v["timestamp_epoch"])][`Q${i+1} Answer`])) {
                   scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += ((j+1)^2) * 4
                   userdata[v["Email Address"]]["total"] += ((j+1)^2) * 4
 
@@ -313,7 +323,7 @@ function qupd() {
   const tt = __tt.replace("/c", ",")
 
   document.querySelector("#qtxt").textContent = tt != "" && tt || "UNDEFINED"
-  document.querySelector("#qtxt").style.display = tt != "" && "inline" || "none"
+  document.querySelector("#qtxt").style.display = tt != "" && "block" || "none"
 
   document.documentElement.style.setProperty("--hover-opacity", "100%")
 
@@ -329,9 +339,11 @@ function qupd() {
   if (ii != "") {
     const qimg = (ii).split("id=")
     document.querySelector("#qimg").style.backgroundImage = `url(https://lh3.googleusercontent.com/d/${qimg[1]})`
+    document.querySelector("#qimg").style.backgroundColor = "var(--primary-color)"
     document.documentElement.style.setProperty("--hover-opacity", "0%")
   } else {
     document.querySelector("#qimg").style.backgroundImage = ""
+    document.querySelector("#qimg").style.backgroundColor = "var(--text-color)"
   }
 }
 
