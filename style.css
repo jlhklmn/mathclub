@@ -364,6 +364,7 @@ header h3 {
     text-align: left;
     color: var(--subtext-color);
     font-size: 15px;
+    height: 15px;
 }
 
 #competitive > div > div > #score {
@@ -489,4 +490,5 @@ header h3 {
         height: 22vh;
     }
 }
+
 
