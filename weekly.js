@@ -71,10 +71,11 @@ async function fetchCsvToJson(url) {
 
     document.querySelector("#qtxt").textContent = tt != "" && tt || "*No question provided by the problem designer*"
     document.querySelector("#qtxt").style.display = (tt != "" && ii == "") && "inline" || "none"
-    document.querySelector("#qimg").style.display = (tt == "" && ii != "") && "flex" || "none"
 
-    const qimg = (jsonData[jsonData.length-1]["Weekly Question (Image)"]).split("id=")
-    document.querySelector("#qimg").style.backgroundImage = `url(https://lh3.googleusercontent.com/d/${qimg[1]})`
+    if (ii != "") {
+      const qimg = (jsonData[jsonData.length-1]["Weekly Question (Image)"]).split("id=")
+      document.querySelector("#qimg").style.backgroundImage = `url(https://lh3.googleusercontent.com/d/${qimg[1]})`
+    }
 
     const author = jsonData[jsonData.length-1]["Author Name"]
     document.querySelector("#displayname").textContent = `Question designed by ${author == "" && jsonData[jsonData.length-1]["Email Address"].split("@")[0] || author}`
