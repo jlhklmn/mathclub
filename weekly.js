@@ -38,7 +38,7 @@ document.querySelector("#weekly").style.display = "none"
 
 document.querySelector("#datedisplayleaderboard").addEventListener("click", () => {
   display --
-  if (display < 0) {display = 0}
+  if (display < 0) {display = max}
 
   upd()
   console.log("Display; " + String(display))
@@ -133,6 +133,7 @@ async function fetchCsvToJson(url) {
 
           if (!userdata[v["Email Address"]]) {userdata[v["Email Address"]] = {
             "streak": 0,
+            "total": 0,
             "display": v["Email Address"].split("@")[0],
             "submitted": []
           }}
@@ -156,6 +157,8 @@ async function fetchCsvToJson(url) {
             if (answ[ww(v["timestamp_epoch"])]) {
               if (Number(v["Final Answer"]) == Number(answ[ww(v["timestamp_epoch"])]["Correct Answer"])) {
                 scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += 50
+                userdata[v["Email Address"]]["total"] += 50
+
                 userdata[v["Email Address"]]["streak"] ++
               } else {
                 userdata[v["Email Address"]]["streak"] = 0
@@ -170,6 +173,18 @@ async function fetchCsvToJson(url) {
 
         for (const [key, data] of Object.entries(scoredata)) {
           scoredata[key] = Object.fromEntries(Object.entries(data).sort(([, a], [, b]) => {a - b}))
+        }
+
+        const temp = scoredata
+        scoredata = {}
+        scoredata["All Time Scores"] = {}
+
+        for (const [key, data] of Object.entries(userdata)) {
+          scoredata["All Time Scores"][key] = data["total"]
+        }
+
+        for (const [key, data] of Object.entries(temp)) {
+          scoredata[key] = data
         }
 
         console.log(userdata)
@@ -218,7 +233,7 @@ async function fetchCsvToJson(url) {
                 }
             })
 
-            streak.style.display = (userdata[email]["streak"] == 1 || rn != epoch) && "none" || "inline"
+            streak.style.display = (userdata[email]["streak"] == 1 || (rn != epoch && epoch != "All Time Scores")) && "none" || "inline"
             
             span.appendChild(place)
             span.appendChild(streak)
