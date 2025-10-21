@@ -288,6 +288,8 @@ header h3 {
     background-position: center;
     background-size: cover;
     margin: 0 auto;
+    display: flex;
+    background-color: var(--text-color);
 }
 
 #question h1 {
@@ -384,6 +386,16 @@ header h3 {
     color: var(--text-color);
     text-align: center;
     justify-self: center;
+}
+
+#question h4 {
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 300;
+    text-align: left;
+    width: calc(100% - 12px);
+    height: auto;
+    margin: auto;
 }
 
 @media (prefers-color-scheme: light) {
