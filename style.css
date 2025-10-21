@@ -392,7 +392,7 @@ header h3 {
     font-size: 16px;
     color: var(--primary-color);
     font-weight: 300;
-    text-align: left;
+    text-align: center;
     width: calc(100% - 32px);
     height: auto;
     margin: auto;
