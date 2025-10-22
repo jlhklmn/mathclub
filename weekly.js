@@ -31,9 +31,6 @@ const months = [
 
 document.querySelector("#weekly").style.display = "none"
 
-document.querySelector("#qtxt").style.height = `calc(${document.querySelector("#qtxt").style.width}/1.5)`
-document.querySelector("#qtxt").style.lineHeight = `calc((${document.querySelector("#qtxt").style.width}/1.5) - 16px)`
-
 // Methods
 function tv(value) {
   value = String(value).replace(/\s+/g, '')
