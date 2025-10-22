@@ -133,6 +133,7 @@ nav a span {
     line-height: 28px;
     text-align: center;
     transform: translateY(8px);
+    color: var(--text-color);
 }
 
 #upcoming-events div #date #month {
@@ -523,4 +524,5 @@ header h3 {
         height: 22vh;
     }
 }
+
 
