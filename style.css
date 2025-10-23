@@ -362,7 +362,7 @@ header h3 {
     font-size: 17px;
     height: 17px;
     font-weight: 400;
-    text-overflow: ellipsis;
+    text-overflow: clip;
 }
 
 #competitive > div > div > h3 {
@@ -373,7 +373,7 @@ header h3 {
     font-size: 17px;
     height: 17px;
     width: 60%;
-    text-overflow: ellipsis;
+    text-overflow: clip;
 }
 
 #competitive > div > div > #score {
@@ -384,7 +384,7 @@ header h3 {
     width: 25%;
     font-size: 17px;
     height: 17px;
-    text-overflow: ellipsis;
+    text-overflow: clip;
 }
 
 #competitive > div > div > h1 {
