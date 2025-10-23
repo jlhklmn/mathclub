@@ -60,14 +60,6 @@ async function fetchCsvToJson(url) {
         date.appendChild(day)
         div.appendChild(date)
         div.appendChild(span)
-
-        s = false
-        event["Event Title"].split("").forEach((char) => {
-            if (("abcdefghijklmnopqrstuvwxyz 0123456789").indexOf(char.toLowerCase()) == -1 && (s == false)) {
-                h1.style.transform = "translateY(-3px)"
-                s = true
-            }
-        })
         
         h1.textContent = event["Event Title"].toUpperCase()
         
