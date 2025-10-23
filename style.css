@@ -88,6 +88,8 @@ nav a span {
     color: var(--text-color);
     font-size: 20px;
     text-align: left;
+    height: 23px;
+    line-height: 23px;
     width: 100%;
     margin: 0;
     margin-bottom: 4px;
@@ -97,6 +99,8 @@ nav a span {
     color: var(--subtext-color);
     font-size: 11px;
     text-align: left;
+    height: 14px;
+    line-height: 14px;
     width: 100%;
     margin: 0;
 }
@@ -106,6 +110,8 @@ nav a span {
     font-size: 11px;
     padding: 0;
     text-align: left;
+    height: 14px;
+    line-height: 14px;
     width: auto;
     margin: 0;
     margin-top: 32px;
@@ -360,8 +366,9 @@ header h3 {
     margin-right: 6px;
     color: var(--text-color);
     font-size: 17px;
-    height: 17px;
+    height: 20px;
     font-weight: 400;
+    line-height: 20px;
     overflow: hidden;
 }
 
@@ -371,8 +378,9 @@ header h3 {
     text-align: left;
     color: var(--subtext-color);
     font-size: 17px;
-    height: 17px;
+    height: 20px;
     width: 60%;
+    line-height: 20px;
     overflow: hidden;
 }
 
@@ -383,7 +391,8 @@ header h3 {
     margin-right: 6px;
     width: 25%;
     font-size: 17px;
-    height: 17px;
+    height: 20px;
+    line-height: 20px;
     overflow: hidden;
 }
 
@@ -474,7 +483,7 @@ header h3 {
 
     #weekly > #question, #competitive {
         align-self: center;
-        width: 90%;
+        width: 100%;
     }
 
     #weekly h1 {
