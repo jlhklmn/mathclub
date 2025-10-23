@@ -54,7 +54,7 @@ nav a span {
 
 #recruitment, #about {
     width: 100vw;
-    height: calc(100vh - 50px);
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -359,7 +359,7 @@ header h3 {
     width: 32px;
     margin-right: 6px;
     color: var(--text-color);
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 400;
 }
 
@@ -368,8 +368,8 @@ header h3 {
     padding: 0;
     text-align: left;
     color: var(--subtext-color);
-    font-size: 15px;
-    height: 15px;
+    font-size: 17px;
+    height: 17px;
 }
 
 #competitive > div > div > #score {
@@ -383,12 +383,12 @@ header h3 {
     background-image: url("streak.png");
     background-position: center;
     background-size: contain;
-    width: 22px;
+    width: 24px;
     aspect-ratio: 1;
     margin: 0;
     margin-right: 6px;
-    font-size: 10px;
-    line-height: 22px;
+    font-size: 12px;
+    line-height: 24px;
     color: var(--text-color);
     text-align: center;
     justify-self: center;
@@ -399,6 +399,7 @@ header h3 {
     color: var(--primary-color);
     background-color: var(--text-color);
     font-weight: 300;
+    box-sizing: border-box;
     text-align: center;
     width: calc(100% - 16px);
     margin: auto;
@@ -524,5 +525,3 @@ header h3 {
         height: 22vh;
     }
 }
-
-
