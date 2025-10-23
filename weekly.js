@@ -202,7 +202,7 @@ async function fetchCsvToJson(url) {
                 }
               } else {
                 for (j = 0; j < 5; j ++) {
-                  if (tv(v[`Question ${i+1}`]) == tv(answ[ww(v["timestamp_epoch"])][`Q${i+1} Answer`])) {
+                  if (tv(v[`Question ${j+1}`]) == tv(answ[ww(v["timestamp_epoch"])][`Q${j+1} Answer`])) {
                     scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += ((j+1)^2) * 4
                     userdata[v["Email Address"]]["total"] += ((j+1)^2) * 4
 
