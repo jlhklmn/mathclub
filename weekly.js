@@ -269,14 +269,6 @@ async function fetchCsvToJson(url) {
             streak.textContent = cma(userdata[email]["streak"])
             place.textContent = p+". "
 
-            mmmmmmm = false
-            userdata[email]["display"].split("").forEach((char) => {
-                if (("abcdefghijklmnopqrstuvwxyz 0123456789").indexOf(char.toLowerCase()) == -1 && (mmmmmmm == false)) {
-                    name.style.transform = "translateY(-2px)"
-                    mmmmmmm = true
-                }
-            })
-
             streak.style.display = (userdata[email]["streak"] <= 1 || (rn != epoch && epoch != "All Time Scores")) && "none" || "inline"
             
             span.appendChild(place)
