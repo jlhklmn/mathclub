@@ -194,9 +194,9 @@ async function fetchCsvToJson(url) {
               var t = false
 
               if (String(v["Manual"]).toLowerCase() == "true") {
-                if (String(v["Correct"]).toLowerCase() == "true") {
-                  scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += 20
-                  userdata[v["Email Address"]]["total"] += 20
+                if (v["Grade"] != ""  && Number(v["Grade"] > 0)) {
+                  scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += Number(v["Grade"])
+                  userdata[v["Email Address"]]["total"] += Number(v["Grade"])
 
                   t = true
                 }
