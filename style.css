@@ -360,7 +360,9 @@ header h3 {
     margin-right: 6px;
     color: var(--text-color);
     font-size: 17px;
+    height: 17px;
     font-weight: 400;
+    text-overflow: ellipsis;
 }
 
 #competitive > div > div > h3 {
@@ -380,6 +382,8 @@ header h3 {
     margin-left: auto;
     margin-right: 6px;
     width: 25%;
+    font-size: 17px;
+    height: 17px;
     text-overflow: ellipsis;
 }
 
