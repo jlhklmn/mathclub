@@ -370,6 +370,8 @@ header h3 {
     color: var(--subtext-color);
     font-size: 17px;
     height: 17px;
+    width: 60%;
+    text-overflow: ellipsis;
 }
 
 #competitive > div > div > #score {
@@ -377,6 +379,8 @@ header h3 {
     color: var(--text-color);
     margin-left: auto;
     margin-right: 6px;
+    width: 25%;
+    text-overflow: ellipsis;
 }
 
 #competitive > div > div > h1 {
