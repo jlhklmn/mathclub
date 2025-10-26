@@ -190,7 +190,7 @@ async function fetchCsvToJson(url) {
               }
             }
 
-            if (answ[ww(v["timestamp_epoch"])]) {
+            if (answ[ww(v["timestamp_epoch"])] && answ[ww(v["timestamp_epoch"])]["timestamp_epoch"] < v["timestamp_epoch"]) {
               var t = false
 
               if (String(v["Manual"]).toLowerCase() == "true") {
@@ -212,11 +212,11 @@ async function fetchCsvToJson(url) {
               }
 
               if (t) {userdata[v["Email Address"]]["streak"] ++} else {userdata[v["Email Address"]]["streak"] = 0}
+              
+              userdata[v["Email Address"]]["submitted"].push(ww(v["timestamp_epoch"]))
             } else {
               console.log(ww(v["timestamp_epoch"])+"; No answer provided")
             }
-
-            userdata[v["Email Address"]]["submitted"].push(ww(v["timestamp_epoch"]))
           }
         })
 
