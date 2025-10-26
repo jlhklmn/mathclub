@@ -193,7 +193,7 @@ async function fetchCsvToJson(url) {
             if (answ[ww(v["timestamp_epoch"])] && answ[ww(v["timestamp_epoch"])]["timestamp_epoch"] < v["timestamp_epoch"]) {
               var t = false
 
-              if (String(v["Manual"]).toLowerCase() == "true") {
+              if (String(v["ManualAuto"]).toLowerCase() == "false") {
                 if (v["Grade"] != ""  && Number(v["Grade"] > 0)) {
                   scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += Number(v["Grade"])
                   userdata[v["Email Address"]]["total"] += Number(v["Grade"])
