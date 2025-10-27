@@ -61,6 +61,9 @@ async function fetchCsvToJson(url) {
         div.appendChild(date)
         div.appendChild(span)
         
+        month.style.color = "#f6f5f2"
+        day.style.color = "#f6f5f2"
+
         h1.textContent = event["Event Title"].toUpperCase()
         
         if (event["Event Description"] == "") {
