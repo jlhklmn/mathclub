@@ -50,7 +50,10 @@ function mm(epoch) {
 function ww(epoch) {
   const d = new Date(Number(epoch))
   const s = d.getUTCDate() - d.getUTCDay()
-  if (s < 0) { s = 1 }
+  
+  if (s < 0) {
+    s = 1
+  }
 
   return `${s}${s == 1 && "st" || s == 2 && "nd" || s == 3 && "rd" || "th"} of ${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
 }
