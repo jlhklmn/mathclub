@@ -324,11 +324,10 @@ function qupd() {
   const _tt = d[`Q${String(qnum)} Text`]
   const ii = d[`Q${String(qnum)} Image`]
 
-  const __tt = _tt.replace("/n", "\n")
-  const tt = __tt.replace("/c", ",")
+  const tt = _tt.replace("/n", "\n")
 
-  document.querySelector("#qtxt").textContent = tt != "" && tt || "UNDEFINED"
-  document.querySelector("#qtxt").style.display = tt != "" && "block" || "none"
+  document.querySelector("#qtxt").textContent = tt.replace("/c", ",") != "" && tt.replace("/c", ",") || "UNDEFINED"
+  document.querySelector("#qtxt").style.display = tt.replace("/c", ",") != "" && "block" || "none"
 
   document.documentElement.style.setProperty("--hover-opacity", "100%")
 
