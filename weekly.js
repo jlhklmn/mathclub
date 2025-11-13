@@ -233,15 +233,23 @@ async function fetchCsvToJson(url) {
         for (const [key, data] of Object.entries(userdata)) {
           scoredata["All Time Scores"][key] = data["total"]
         }
+        scarray = {}
 
         for (const [key, data] of Object.entries(scoredata)) {
-          scoredata[key] = Object.fromEntries(Object.entries(data).sort(([, a], [, b]) => { a - b }))
+          scarray[key] = []
+
+          for (const [email, score] of Object.entries(data)) {
+            scarray[key].push([email, score])
+          }
+
+          scarray[key].sort((a, b) => b[1] - a[1])
         }
 
         console.log(answ)
         console.log(userdata)
         console.log(jsonData)
         console.log(scoredata)
+        console.log(scarray)
 
         // ==================
         max = Object.keys(scoredata).length - 1
@@ -262,8 +270,10 @@ async function fetchCsvToJson(url) {
           p = 0
           document.querySelector("#placeholderdiv").style.display = "none"
 
-          for (const [email, score] of Object.entries(users)) {
+          for (var i = 0; i < scarray[epoch].length; i++) {
             p++
+
+            const data = scarray[epoch][i]
 
             const span = document.createElement("div")
             const name = document.createElement("h3")
@@ -273,12 +283,12 @@ async function fetchCsvToJson(url) {
 
             s.setAttribute("id", "score")
 
-            name.textContent = userdata[email]["display"]
-            s.textContent = cma(score) + " ✦"
-            streak.textContent = cma(userdata[email]["streak"])
+            name.textContent = userdata[data[0]]["display"]
+            s.textContent = cma(data[1]) + " ✦"
+            streak.textContent = cma(userdata[data[0]]["streak"])
             place.textContent = p + ". "
 
-            streak.style.display = (userdata[email]["streak"] <= 1 || (rn != epoch && epoch != "All Time Scores")) && "none" || "inline"
+            streak.style.display = (userdata[data[0]]["streak"] <= 1 || (rn != epoch && epoch != "All Time Scores")) && "none" || "inline"
 
             span.appendChild(place)
             span.appendChild(streak)
