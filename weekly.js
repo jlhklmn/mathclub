@@ -196,11 +196,13 @@ async function fetchCsvToJson(url) {
               }
             }
 
-            if (answ[ww(v["timestamp_epoch"])] && answ[ww(v["timestamp_epoch"])]["timestamp_epoch"] < v["timestamp_epoch"]) {
+            if (answ[ww(v["timestamp_epoch"])] && answ[ww(v["timestamp_epoch"])]["timestamp_epoch"] <= v["timestamp_epoch"]) {
               var t = false
 
               if (String(v["Manual"]).toLowerCase() == "true") {
                 if (v["Grade"] != "" && Number(v["Grade"] > 0)) {
+                  console.log("Manual grading")
+
                   scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += Number(v["Grade"])
                   userdata[v["Email Address"]]["total"] += Number(v["Grade"])
 
@@ -236,6 +238,7 @@ async function fetchCsvToJson(url) {
           scoredata["All Time Scores"][key] = data["total"]
         }
 
+        console.log(answ)
         console.log(userdata)
         console.log(jsonData)
         console.log(scoredata)
@@ -321,13 +324,14 @@ function upd() {
 function qupd() {
   const d = jlhklmn[jlhklmn.length - 1]
 
-  const _tt = d[`Q${String(qnum)} Text`]
+  var tt = d[`Q${String(qnum)} Text`]
   const ii = d[`Q${String(qnum)} Image`]
 
-  const tt = _tt.replace("/n", "\n")
+  tt = tt.replace("/n", "\n")
+  tt = tt.replace("/c", ",")
 
-  document.querySelector("#qtxt").textContent = tt.replace("/c", ",") != "" && tt.replace("/c", ",") || "UNDEFINED"
-  document.querySelector("#qtxt").style.display = tt.replace("/c", ",") != "" && "block" || "none"
+  document.querySelector("#qtxt").textContent = tt != "" && tt || "UNDEFINED"
+  document.querySelector("#qtxt").style.display = tt != "" && "block" || "none"
 
   document.documentElement.style.setProperty("--hover-opacity", "100%")
 
