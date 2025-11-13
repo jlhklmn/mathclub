@@ -49,8 +49,8 @@ function mm(epoch) {
 
 function ww(epoch) {
   const d = new Date(Number(epoch))
-  const s = d.getUTCDate() - d.getUTCDay()
-  
+  var s = d.getUTCDate() - d.getUTCDay()
+
   if (s < 0) {
     s = 1
   }
