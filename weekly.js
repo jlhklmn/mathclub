@@ -228,14 +228,14 @@ async function fetchCsvToJson(url) {
           }
         })
 
-        for (const [key, data] of Object.entries(scoredata)) {
-          scoredata[key] = Object.fromEntries(Object.entries(data).sort(([, a], [, b]) => { a - b }))
-        }
-
         scoredata["All Time Scores"] = {}
 
         for (const [key, data] of Object.entries(userdata)) {
           scoredata["All Time Scores"][key] = data["total"]
+        }
+
+        for (const [key, data] of Object.entries(scoredata)) {
+          scoredata[key] = Object.fromEntries(Object.entries(data).sort(([, a], [, b]) => { a - b }))
         }
 
         console.log(answ)
