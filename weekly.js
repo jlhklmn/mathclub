@@ -175,6 +175,7 @@ async function fetchCsvToJson(url) {
             userdata[v["Email Address"]] = {
               "streak": 0,
               "total": 0,
+              "streets": -1,
               "display": v["Email Address"].split("@")[0],
               "submitted": []
             }
@@ -200,9 +201,7 @@ async function fetchCsvToJson(url) {
               var t = false
 
               if (String(v["Manual"]).toLowerCase() == "true") {
-                if (v["Grade"] != "" && Number(v["Grade"] > 0)) {
-                  console.log("Manual grading")
-
+                if (Number(v["Grade"]) && Number(v["Grade"] > 0)) {
                   scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += Number(v["Grade"])
                   userdata[v["Email Address"]]["total"] += Number(v["Grade"])
 
@@ -219,7 +218,12 @@ async function fetchCsvToJson(url) {
                 }
               }
 
-              if (t) { userdata[v["Email Address"]]["streak"]++ } else { userdata[v["Email Address"]]["streak"] = 0 }
+              if (Number(v["timestamp_epoch"]) - Number(userdata[v["Email Address"]]["streets"]) > 622080000) { t = false }
+
+              if (t) {
+                userdata[v["Email Address"]]["streak"]++
+                userdata[v["Email Address"]["streets"] = v["timestamp_epoch"]]
+              } else { userdata[v["Email Address"]]["streak"] = 0 }
 
               userdata[v["Email Address"]]["submitted"].push(ww(v["timestamp_epoch"]))
             } else {
@@ -339,6 +343,7 @@ function qupd() {
 
   tt = tt.replace("/n", "\n")
   tt = tt.replace("/c", ",")
+  tt = tt.replace(";", ",")
 
   document.querySelector("#qtxt").textContent = tt != "" && tt || "UNDEFINED"
   document.querySelector("#qtxt").style.display = tt != "" && "block" || "none"
