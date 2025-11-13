@@ -15,18 +15,18 @@ const dcolors = [
 ]
 
 const months = [
-    "January",
-    "Febuary",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+  "January",
+  "Febuary",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
 ]
 
 document.querySelector("#weekly").style.display = "none"
@@ -35,7 +35,7 @@ document.querySelector("#weekly").style.display = "none"
 function tv(value) {
   value = String(value).replace(/\s+/g, '')
 
-  if (! Number(value)) {
+  if (!Number(value)) {
     return String(value).toLowerCase()
   } else {
     String(Math.round(Number(value) * 1000) / 1000)
@@ -49,18 +49,19 @@ function mm(epoch) {
 
 function ww(epoch) {
   const d = new Date(Number(epoch))
-  const s = d.getUTCDate()-d.getUTCDay()
-  
-  return `${s}${s==1&&"st"||s==2&&"nd"||s==3&&"rd"||"th"} of ${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
+  const s = d.getUTCDate() - d.getUTCDay()
+  if (s < 0) { s = 1 }
+
+  return `${s}${s == 1 && "st" || s == 2 && "nd" || s == 3 && "rd" || "th"} of ${months[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
 }
 
 function cma(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 document.querySelector("#datedisplayleaderboard").addEventListener("click", () => {
-  display --
-  if (display < 0) {display = max}
+  display--
+  if (display < 0) { display = max }
 
   upd()
   console.log("Display; " + String(display))
@@ -91,9 +92,9 @@ async function fetchCsvToJson(url) {
   try {
     const response = await fetch(url)
     if (!response.ok) throw new Error('Network response was not ok')
-    
+
     const csvText = await response.text()
-    
+
     const lines = csvText.trim().split('\n')
     const headers = lines[0].split(',')
 
@@ -113,10 +114,10 @@ async function fetchCsvToJson(url) {
 
     qupd()
 
-    const author = jsonData[jsonData.length-1]["Author Name"]
-    document.querySelector("#displayname").textContent = `Questions uploaded by ${author == "" && jsonData[jsonData.length-1]["Email Address"].split("@")[0] || author}`
+    const author = jsonData[jsonData.length - 1]["Author Name"]
+    document.querySelector("#displayname").textContent = `Questions uploaded by ${author == "" && jsonData[jsonData.length - 1]["Email Address"].split("@")[0] || author}`
 
-    document.querySelector("#qdate").textContent = "Last Updated: "+ww(jsonData[jsonData.length-1]["timestamp_epoch"])
+    document.querySelector("#qdate").textContent = "Last Updated: " + ww(jsonData[jsonData.length - 1]["timestamp_epoch"])
 
     // ==================
     const qData = jsonData
@@ -125,9 +126,9 @@ async function fetchCsvToJson(url) {
       try {
         const response = await fetch(url)
         if (!response.ok) throw new Error('Network response was not ok')
-        
+
         const csvText = await response.text()
-        
+
         const lines = csvText.trim().split('\n')
         const headers = lines[0].split(',')
 
@@ -153,10 +154,10 @@ async function fetchCsvToJson(url) {
           _dd.push(v["timestamp_epoch"])
         })
 
-        _dd.sort((a, b) => {a, b})
+        _dd.sort((a, b) => { a, b })
 
         _dd.forEach((t) => {
-          if (! datedata.includes(mm(t))) {datedata.push(mm(t))}
+          if (!datedata.includes(mm(t))) { datedata.push(mm(t)) }
         })
 
         qData.forEach((t) => {
@@ -164,28 +165,30 @@ async function fetchCsvToJson(url) {
         })
 
         jsonData.forEach((v) => {
-          if (!scoredata[mm(v["timestamp_epoch"])]) {scoredata[mm(v["timestamp_epoch"])] = {}}
-          if (!scoredata[mm(v["timestamp_epoch"])][v["Email Address"]]) {scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] = 0}
+          if (!scoredata[mm(v["timestamp_epoch"])]) { scoredata[mm(v["timestamp_epoch"])] = {} }
+          if (!scoredata[mm(v["timestamp_epoch"])][v["Email Address"]]) { scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] = 0 }
 
-          if (!userdata[v["Email Address"]]) {userdata[v["Email Address"]] = {
-            "streak": 0,
-            "total": 0,
-            "display": v["Email Address"].split("@")[0],
-            "submitted": []
-          }}
+          if (!userdata[v["Email Address"]]) {
+            userdata[v["Email Address"]] = {
+              "streak": 0,
+              "total": 0,
+              "display": v["Email Address"].split("@")[0],
+              "submitted": []
+            }
+          }
 
           if (v["Display Name (Keep this appropriate)"] != "") {
             userdata[v["Email Address"]]["display"] = v["Display Name (Keep this appropriate)"]
           }
-          
-          if (! userdata[v["Email Address"]]["submitted"].includes(ww(v["timestamp_epoch"]))) {
+
+          if (!userdata[v["Email Address"]]["submitted"].includes(ww(v["timestamp_epoch"]))) {
             const i = datedata.findIndex(t => ww(v["timestamp_epoch"]) == t)
-            
+
             if (i >= 0) {
-              if (!scoredata[datedata[i-1]]) {
-                if (!scoredata[datedata[i-1]][v["Email Address"]]) {
+              if (!scoredata[datedata[i - 1]]) {
+                if (!scoredata[datedata[i - 1]][v["Email Address"]]) {
                   userdata[v["Email Address"]]["streak"] = 0
-                  console.log(v["Email Address"]+" Streak Reset")
+                  console.log(v["Email Address"] + " Streak Reset")
                 }
               }
             }
@@ -193,35 +196,35 @@ async function fetchCsvToJson(url) {
             if (answ[ww(v["timestamp_epoch"])] && answ[ww(v["timestamp_epoch"])]["timestamp_epoch"] < v["timestamp_epoch"]) {
               var t = false
 
-              if (String(v["ManualAuto"]).toLowerCase() == "false") {
-                if (v["Grade"] != ""  && Number(v["Grade"] > 0)) {
+              if (String(v["Manual"]).toLowerCase() != "true") {
+                if (v["Grade"] != "" && Number(v["Grade"] > 0)) {
                   scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += Number(v["Grade"])
                   userdata[v["Email Address"]]["total"] += Number(v["Grade"])
 
                   t = true
                 }
               } else {
-                for (j = 0; j < 5; j ++) {
-                  if (tv(v[`Question ${j+1}`]) == tv(answ[ww(v["timestamp_epoch"])][`Q${j+1} Answer`])) {
-                    scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += (j+1)*10
-                    userdata[v["Email Address"]]["total"] += (j+1)*10
+                for (j = 0; j < 5; j++) {
+                  if (tv(v[`Question ${j + 1}`]) == tv(answ[ww(v["timestamp_epoch"])][`Q${j + 1} Answer`])) {
+                    scoredata[mm(v["timestamp_epoch"])][v["Email Address"]] += (j + 1) * 10
+                    userdata[v["Email Address"]]["total"] += (j + 1) * 10
 
                     t = true
                   }
                 }
               }
 
-              if (t) {userdata[v["Email Address"]]["streak"] ++} else {userdata[v["Email Address"]]["streak"] = 0}
-              
+              if (t) { userdata[v["Email Address"]]["streak"]++ } else { userdata[v["Email Address"]]["streak"] = 0 }
+
               userdata[v["Email Address"]]["submitted"].push(ww(v["timestamp_epoch"]))
             } else {
-              console.log(ww(v["timestamp_epoch"])+"; No answer provided")
+              console.log(ww(v["timestamp_epoch"]) + "; No answer provided")
             }
           }
         })
 
         for (const [key, data] of Object.entries(scoredata)) {
-          scoredata[key] = Object.fromEntries(Object.entries(data).sort(([, a], [, b]) => {a - b}))
+          scoredata[key] = Object.fromEntries(Object.entries(data).sort(([, a], [, b]) => { a - b }))
         }
 
         scoredata["All Time Scores"] = {}
@@ -236,13 +239,13 @@ async function fetchCsvToJson(url) {
 
         // ==================
         max = Object.keys(scoredata).length - 1
-        
+
         const date = document.querySelector("#datedisplayleaderboard")
         const competitve = document.querySelector("#competitive")
         display = max
 
         const dd = new Date()
-        const rn = months[dd.getUTCMonth()]+", "+dd.getUTCFullYear()
+        const rn = months[dd.getUTCMonth()] + ", " + dd.getUTCFullYear()
 
         date.textContent = rn
 
@@ -254,7 +257,7 @@ async function fetchCsvToJson(url) {
           document.querySelector("#placeholderdiv").style.display = "none"
 
           for (const [email, score] of Object.entries(users)) {
-            p ++
+            p++
 
             const span = document.createElement("div")
             const name = document.createElement("h3")
@@ -267,10 +270,10 @@ async function fetchCsvToJson(url) {
             name.textContent = userdata[email]["display"]
             s.textContent = cma(score) + " ✦"
             streak.textContent = cma(userdata[email]["streak"])
-            place.textContent = p+". "
+            place.textContent = p + ". "
 
             streak.style.display = (userdata[email]["streak"] <= 1 || (rn != epoch && epoch != "All Time Scores")) && "none" || "inline"
-            
+
             span.appendChild(place)
             span.appendChild(streak)
             span.appendChild(name)
@@ -305,15 +308,15 @@ async function fetchCsvToJson(url) {
 
 function upd() {
   const date = document.querySelector("#datedisplayleaderboard")
-  
+
   for (i = 0; i < ui.length; i++) {
-    if (i == display) {date.textContent = ui[i][0]}
+    if (i == display) { date.textContent = ui[i][0] }
     ui[i][1].style.display = i == display && "block" || "none"
   }
 }
 
 function qupd() {
-  const d = jlhklmn[jlhklmn.length-1]
+  const d = jlhklmn[jlhklmn.length - 1]
 
   const _tt = d[`Q${String(qnum)} Text`]
   const ii = d[`Q${String(qnum)} Image`]
@@ -327,7 +330,7 @@ function qupd() {
   document.documentElement.style.setProperty("--hover-opacity", "100%")
 
   const diff = d[`Q${String(qnum)} Difficulty`]
-  const dc = dcolors[diff-1]
+  const dc = dcolors[diff - 1]
 
   document.querySelector("#q1").style.backgroundColor = qnum == 1 && dc || "var(--secondary-color)"
   document.querySelector("#q2").style.backgroundColor = qnum == 2 && dc || "var(--secondary-color)"
