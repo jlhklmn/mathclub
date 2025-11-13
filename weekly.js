@@ -38,7 +38,7 @@ function tv(value) {
   if (!Number(value)) {
     return String(value).toLowerCase()
   } else {
-    String(Math.round(Number(value) * 1000) / 1000)
+    return String(Math.round(Number(value) * 1000) / 1000)
   }
 }
 
